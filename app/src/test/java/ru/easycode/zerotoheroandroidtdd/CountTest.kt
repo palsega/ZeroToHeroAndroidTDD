@@ -2,6 +2,7 @@ package ru.easycode.zerotoheroandroidtdd
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import kotlin.test.assertFailsWith
 
 /**
  * Please also check ui test
@@ -64,11 +65,10 @@ class CountTest {
 
     @Test
     fun test_step_negative_message() {
-        try {
+        val exception = assertFailsWith<IllegalStateException> {
             Count.Base(step = -2, max = 11, min = 0)
-        } catch (e: Exception) {
-            assertEquals("step should be positive, but was -2", e.message)
         }
+        assertEquals("step should be positive, but was -2", exception.message)
     }
 
     @Test(expected = IllegalStateException::class)
@@ -83,11 +83,10 @@ class CountTest {
 
     @Test
     fun test_negative_max_message() {
-        try {
+        val exception = assertFailsWith<IllegalStateException> {
             Count.Base(step = 5, max = -2, min = 0)
-        } catch (e: Exception) {
-            assertEquals("max should be positive, but was -2", e.message)
         }
+        assertEquals("max should be positive, but was -2", exception.message)
     }
 
     @Test(expected = IllegalStateException::class)
@@ -97,24 +96,22 @@ class CountTest {
 
     @Test
     fun test_max_less_than_step_message() {
-        try {
+        val exception = assertFailsWith<IllegalStateException> {
             Count.Base(step = 5, max = 4, min = 0)
-        } catch (e: Exception) {
-            assertEquals("max should be more than step", e.message)
         }
+        assertEquals("max should be more than step", exception.message)
     }
 
     @Test(expected = IllegalStateException::class)
     fun test_max_less_than_min() {
-        Count.Base(step = 5, max = 0, min = 1)
+        Count.Base(step = 5, max = 3, min = 4)
     }
 
     @Test
     fun test_max_less_than_min_message() {
-        try {
+        val exception = assertFailsWith<IllegalStateException> {
             Count.Base(step = 5, max = 6, min = 7)
-        } catch (e: Exception) {
-            assertEquals("max should be more than min", e.message)
         }
+        assertEquals("max should be more than min", exception.message)
     }
 }
