@@ -25,18 +25,16 @@ interface Count {
             }
         }
 
-        override fun increment(number: String): UiState {
-            val resultAsInt = number.toInt() + step
-            val result = resultAsInt.toString()
-            return if (resultAsInt < max) UiState.Base(result)
-            else UiState.Max(result)
-        }
-
         override fun decrement(number: String): UiState {
             val resultAsInt = number.toInt() - step
             val result = resultAsInt.toString()
-            return if (resultAsInt > min) UiState.Base(result)
-            else UiState.Min(result)
+            return initial(result)
+        }
+
+        override fun increment(number: String): UiState {
+            val resultAsInt = number.toInt() + step
+            val result = resultAsInt.toString()
+            return initial(result)
         }
     }
 }
