@@ -2,6 +2,7 @@ package ru.easycode.zerotoheroandroidtdd
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import ru.easycode.zerotoheroandroidtdd.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +14,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.inputEditText.addTextChangedListener { text ->
+            binding.actionButton.isEnabled = (text?.length ?: 0) >= 3
+        }
+
+        binding.actionButton.setOnClickListener {
+            binding.inputEditText.text?.let { text ->
+                binding.actionButton.isEnabled = false
+                binding.titleTextView.text = text
+                binding.inputEditText.setText("")
+            }
+        }
     }
 
     override fun onDestroy() {

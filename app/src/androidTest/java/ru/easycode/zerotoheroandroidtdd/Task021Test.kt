@@ -5,6 +5,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
@@ -18,7 +19,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.android.material.textfield.TextInputEditText
 import org.hamcrest.Matchers.allOf
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -68,7 +68,7 @@ class Task021Test {
         onView(withId(R.id.inputEditText)).check(matches(withText("mi")))
         onView(withId(R.id.actionButton)).check(matches(isNotEnabled()))
 
-        onView(withId(R.id.inputEditText)).perform(typeText("n"))
+        onView(withId(R.id.inputEditText)).perform(typeText("n"), closeSoftKeyboard())
         onView(withId(R.id.inputEditText)).check(matches(withText("min")))
         onView(withId(R.id.actionButton)).check(matches(isEnabled()))
 
