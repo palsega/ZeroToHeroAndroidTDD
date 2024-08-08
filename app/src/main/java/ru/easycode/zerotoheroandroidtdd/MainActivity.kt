@@ -13,6 +13,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.actionButton.setOnClickListener {
+            // use trim() if keyboard is SwiftKey to remove redundant space
+            binding.titleTextView.text = binding.inputEditText.text?.trim()
+            binding.inputEditText.setText("")
+        }
     }
 
     override fun onDestroy() {

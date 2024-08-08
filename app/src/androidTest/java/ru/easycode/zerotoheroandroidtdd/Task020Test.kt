@@ -18,7 +18,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.android.material.textfield.TextInputEditText
 import org.hamcrest.Matchers.allOf
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -60,13 +59,13 @@ class Task020Test {
             )
         ).check(matches(isDisplayed()))
 
-        onView(withId(R.id.inputEditText)).perform(typeText("A new text now!"), closeSoftKeyboard())
+        onView(withId(R.id.inputEditText)).perform(typeText("A newest text now!"), closeSoftKeyboard())
         onView(withId(R.id.actionButton)).perform(click())
         onView(withId(R.id.inputEditText)).check(matches(withText("")))
-        onView(withId(R.id.titleTextView)).check(matches(withText("A new text now!")))
+        onView(withId(R.id.titleTextView)).check(matches(withText("A newest text now!")))
 
         activityScenarioRule.scenario.recreate()
         onView(withId(R.id.inputEditText)).check(matches(withText("")))
-        onView(withId(R.id.titleTextView)).check(matches(withText("A new text now!")))
+        onView(withId(R.id.titleTextView)).check(matches(withText("A newest text now!")))
     }
 }
