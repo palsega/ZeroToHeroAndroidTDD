@@ -1,42 +1,46 @@
 package ru.easycode.zerotoheroandroidtdd
 
+import android.content.Context
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import ru.easycode.zerotoheroandroidtdd.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = requireNotNull(_binding) { "binding init" }
-    private lateinit var inputs: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        inputs = savedInstanceState?.run {
+        savedInstanceState?.run {
             getStringArrayList(KEY).also { list ->
                 list?.forEach { input ->
-                    binding.contentLayout.addView(TextView(this@MainActivity)
-                        .also { it.text = input })
+                    binding.contentLayout.addTextViewWithText(this@MainActivity, input)
                 }
             }
         } ?: ArrayList()
 
         binding.actionButton.setOnClickListener {
-            val input = binding.inputEditText.text
-            inputs.add(input.toString())
-            val newTextView = TextView(this)
-            newTextView.text = input
-            binding.contentLayout.addView(newTextView)
-            input?.clear()
+            val input = binding.inputEditText.text.toString()
+            binding.contentLayout.addTextViewWithText(this, input)
+            binding.inputEditText.text?.clear()
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        val inputs = ArrayList(
+            binding.contentLayout.children
+                .filterIsInstance<TextView>()
+                .map { it.text.toString() }
+                .toList()
+        )
         outState.putStringArrayList(KEY, inputs)
     }
 
@@ -48,4 +52,10 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val KEY = "key"
     }
+}
+
+private fun ViewGroup.addTextViewWithText(context: Context, text: String) {
+    addView(TextView(context).also {
+        it.text = text
+    })
 }
