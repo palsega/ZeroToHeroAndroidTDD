@@ -1,11 +1,12 @@
 package ru.easycode.zerotoheroandroidtdd
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.easycode.zerotoheroandroidtdd.databinding.ItemViewBinding
 
-class CustomAdapter(private val inputs: ArrayList<String>) :
+class CustomAdapter(private val inputs: ArrayList<String> = ArrayList()) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
     class ViewHolder(private val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(text: String) {
@@ -23,4 +24,13 @@ class CustomAdapter(private val inputs: ArrayList<String>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(inputs[position])
     }
+
+    fun addData(input: String) {
+        if (input.isNotEmpty()) {
+            inputs.add(input)
+            notifyItemInserted(inputs.size - 1)
+        }
+    }
+
+    fun saveDataTo(bundle: Bundle) = BundleWrapper.StringArrayList(bundle).save(inputs)
 }
