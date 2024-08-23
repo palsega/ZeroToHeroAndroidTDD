@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
 interface Screen {
+
     fun show(supportFragmentManager: FragmentManager, containerId: Int)
 
     abstract class Replace(private val fragmentClass: Class<out Fragment>) : Screen {
@@ -12,6 +13,12 @@ interface Screen {
                 .replace(containerId, fragmentClass.getDeclaredConstructor().newInstance())
                 .addToBackStack(fragmentClass.simpleName)
                 .commit()
+        }
+    }
+
+    object Pop : Screen {
+        override fun show(supportFragmentManager: FragmentManager, containerId: Int) {
+            supportFragmentManager.popBackStack()
         }
     }
 }

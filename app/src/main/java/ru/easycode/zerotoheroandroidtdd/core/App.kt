@@ -5,7 +5,13 @@ import androidx.lifecycle.ViewModel
 
 class App : Application(), ProvideViewModel {
 
-    private val viewModelFactory = ViewModelFactory.Base(ProvideViewModel.Base())
+    private val clearViewModel: ClearViewModel = object : ClearViewModel {
+        override fun clear(viewModelClass: Class<out ViewModel>) {
+            factory.clear(viewModelClass)
+        }
+    }
+
+    private val factory = ViewModelFactory.Base(ProvideViewModel.Base(clearViewModel))
     override fun <T : ViewModel> viewModel(viewModelClass: Class<T>) =
-        viewModelFactory.viewModel(viewModelClass)
+        factory.viewModel(viewModelClass)
 }
