@@ -23,5 +23,9 @@ class ListFragment : AbstractFragment<FragmentListBinding>() {
         binding.addButton.setOnClickListener {
             viewModel.create()
         }
+
+        viewModel.liveData().observe(viewLifecycleOwner) {
+            adapter.update(ArrayList(it))
+        }
     }
 }
