@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import ru.easycode.zerotoheroandroidtdd.core.ClearViewModel
+import ru.easycode.zerotoheroandroidtdd.data.Repository
+import ru.easycode.zerotoheroandroidtdd.list.ListLiveDataWrapper
+import ru.easycode.zerotoheroandroidtdd.ui.add.AddViewModel
 
 class AddViewModelTest {
 
@@ -18,8 +22,7 @@ class AddViewModelTest {
                 repository = repository,
                 liveDataWrapper = liveDataWrapper,
                 clear = clear,
-                dispatcher = Dispatchers.Unconfined,
-                dispatcherMain = Dispatchers.Unconfined
+                dispatcher = Dispatchers.Unconfined
             )
 
         viewModel.add(value = "new text input")
@@ -42,8 +45,7 @@ class AddViewModelTest {
                 repository = repository,
                 liveDataWrapper = liveDataWrapper,
                 clear = clear,
-                dispatcher = Dispatchers.Unconfined,
-                dispatcherMain = Dispatchers.Unconfined
+                dispatcher = Dispatchers.Unconfined
             )
 
         viewModel.comeback()

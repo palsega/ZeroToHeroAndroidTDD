@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import ru.easycode.zerotoheroandroidtdd.data.Repository
+import ru.easycode.zerotoheroandroidtdd.list.ListLiveDataWrapper
+import ru.easycode.zerotoheroandroidtdd.ui.MainViewModel
 
 class MainViewModelTest {
 
@@ -13,8 +16,7 @@ class MainViewModelTest {
         val liveDataWrapper = FakeListLiveDataWrapper.Base()
         val viewModel = MainViewModel(
             repository = repository, liveDataWrapper = liveDataWrapper,
-            dispatcher = Dispatchers.Unconfined,
-            dispatcherMain = Dispatchers.Unconfined
+            dispatcher = Dispatchers.Unconfined
         )
 
         repository.expectList(listOf("1", "2"))
