@@ -4,6 +4,10 @@ import kotlinx.coroutines.Dispatchers
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import ru.easycode.zerotoheroandroidtdd.FakeClearViewModel.Companion.CLEAR
+import ru.easycode.zerotoheroandroidtdd.data.Repository
+import ru.easycode.zerotoheroandroidtdd.ui.ItemUi
+import ru.easycode.zerotoheroandroidtdd.ui.add.AddViewModel
+import ru.easycode.zerotoheroandroidtdd.ui.list.ListLiveDataWrapper
 
 class AddViewModelTest {
 

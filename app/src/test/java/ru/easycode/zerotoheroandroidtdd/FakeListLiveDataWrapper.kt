@@ -2,6 +2,8 @@ package ru.easycode.zerotoheroandroidtdd
 
 import androidx.lifecycle.LiveData
 import org.junit.Assert.assertEquals
+import ru.easycode.zerotoheroandroidtdd.ui.ItemUi
+import ru.easycode.zerotoheroandroidtdd.ui.list.ListLiveDataWrapper
 
 interface FakeListLiveDataWrapper : ListLiveDataWrapper.All {
 
